@@ -9,7 +9,11 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
-      - run: npx prisma migrate deploy
+      - run: |
+          npx prisma migrate resolve --applied 20261003120000_media_placement
+          npx prisma migrate resolve --applied 20261003130000_lock_data_api
+          npx prisma migrate resolve --applied 20261007120000_form_builder
+          npx prisma migrate deploy
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DIRECT_URL: ${{ secrets.DIRECT_URL }}
